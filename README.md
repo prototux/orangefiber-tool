@@ -24,6 +24,7 @@ Petites remarques sur l'API, dans le desordre, selon ce que je remarque (**NB: n
 * Si le batiment est un pavillon, visiblement, statut_syndic semble etre "PS", logique, vu que y'a pas de syndic.
 * En plus de l'adresse, et des infos sur le raccordement, il semble y avoir l'operateur qui fait l'infra, mais aussi un "no_dossier", acucune idee a quoi ca correspond chez orange
 * Les coordonees geographiques semblent etre dans un format propre a Orange, ce n'est pas des coordonees long/lat usuelles... aucune idee de a quoi ca correspond pour le moment
+* L'API ne semble pas avoir de problemes a donner qu'une seule adresse si xmax et ymax sont les meme que xmin et ymin, c'est ce que j'utilise pour avoir les donnees sur mon logement seulement
 
 # Usage
 
