@@ -43,5 +43,5 @@ cp_referer="Referer: http://couverture-mobile.orange.fr/mapV3/fibre/index.html?g
 
 data=$(curl "$cp_url" -H "$cp_cookie" -H 'Accept-Encoding: gzip, deflate, sdch' -H 'Accept-Language: en-US,en;q=0.8,fr;q=0.6' -H "$cp_ua" -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: */*' -H "$cp_referer" -H 'X-Requested-With: XMLHttpRequest' -H 'X-CookiesOK: I explicitly accept all cookies' -H 'Connection: keep-alive' -sS --compressed)
 
-pretty=$(echo $data | jq --color-output ${5:-.})
+pretty=$(echo $data | jq ${5:-.})
 echo $pretty
