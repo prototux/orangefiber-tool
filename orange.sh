@@ -1,8 +1,22 @@
-#!/bin/zsh
+#!/usr/bin/env bash
+
+## Get token
+function getToken {
+	raw=$(curl 'http://couverture-mobile.orange.fr/mapV3/fibre/json/config.json' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Referer: http://couverture-mobile.orange.fr/mapV3/fibre/index.html?geosignet=true&groupegeosignet=caraibeindien' -H 'X-Requested-With: XMLHttpRequest' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/55.0.2883.11 Chrome/55.0.2883.11 Safari/537.36' -sS --compressed)
+
+	echo $(echo "$raw" | jq .configuration.token | tr -d "\"")
+}
+
+## Read token from tmp file, if it exists, else get it and create the file
+if [[ -f /tmp/orange_token.txt ]]; then
+	token=$(cat /tmp/orange_token.txt)
+else
+	token=$(getToken)
+	echo $token > /tmp/orange_token.txt
+fi
 
 ## Parameters
-pm_sr=${O_SR:-"3857"} # Default: 102100
-pm_token=${O_TOK:-"your_token"} # API token
+pm_sr="3857" # Default: 102100
 
 ## Cook geometry, the QnD way already urlencoded
 g_xmin="$1"
@@ -21,7 +35,7 @@ p_inSR="$pm_sr"
 p_outFields="OBJECTID%2Ctype_logement%2Cetat%2Coperateur%2Cadresse%2Cno_dossier%2Cetape%2Csous_etape%2Cstatut_syndic"
 p_outSR="$pm_sr"
 
-cp_url="http://couverture-mobile.orange.fr/arcsig/rest/services/extern/optimum_ftth/MapServer/0/query?token=$pm_token&f=$p_format&where=$p_where&returnGeometry=$p_returnGeometry&spatialRel=$p_spatialRel&geometry=$p_geometry&geometryType=$p_geometryType&inSR=$p_inSR&outFields=$p_outFields&outSR=$p_outSR"
+cp_url="http://couverture-mobile.orange.fr/arcsig/rest/services/extern/optimum_ftth/MapServer/0/query?token=$token&f=$p_format&where=$p_where&returnGeometry=$p_returnGeometry&spatialRel=$p_spatialRel&geometry=$p_geometry&geometryType=$p_geometryType&inSR=$p_inSR&outFields=$p_outFields&outSR=$p_outSR"
 
 cp_cookie="Cookie: o-cookie-cnil=1; Orange_VU_PROD_B1=Version=5&data=vnaTOLuXpnd2AvYNFHiq1ltc/YRZq72EaO6tt0xiJSp7oLNoEUupV0lWcgDVbKpf2T07RY1TdckcQxF4ZN99uHgVzpKMokMzD7rDg/5ibzxnRhN61unyeOE3PokVoMhPnVKuc2HZ61TIYUd9XkBT24NkXsyq6PQYqXhAvlP6Im0=; ty=6; _gstat=1748096872.1475167334084"
 cp_ua="User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/55.0.2883.11 Chrome/55.0.2883.11 Safari/537.36"

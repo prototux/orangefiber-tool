@@ -1,0 +1,32 @@
+# Attributs possible pour les differents champs:
+
+
+## Etat
+
+* commercialisable
+* signe
+* raccordable
+* adressable
+* indisponible ("_")
+
+## Type_logement
+
+* imm (immeuble)
+* pav (pavillon)
+
+## Etape & Sous_etape
+
+* 1 (La Fibre est dans votre ville)
+* * C (???)
+* 2 (La Fibre est dans votre quartier)
+* * A (???)
+* * B (???)
+* * C (???)
+* 3 (La Fibre est près de votre logement)
+* * A (???)
+* * B (???)
+* * C (???)
+* 4 (Votre logement est éligible)
+* * A
+* * B
+* * C

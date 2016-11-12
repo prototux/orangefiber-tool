@@ -34,9 +34,7 @@ Petites remarques sur l'API, dans le desordre, selon ce que je remarque (**NB: n
 # Usage
 
 * Je previens, le script est vraiment fait a l'arrache, et c'est du reverse engineering de l'API d'Orange (donc ca risque potentiellement de foirer, surtout si Orange apprecie pas ce repo)
-* pm_sr defini la reference spatiale de la map, par defaut c'est ESRI-102100.
-* le script demande un token, j'ai pas mis celui que j'avais dans mes requests parceque j'ai aucune idee de quelles infos ca contient pour le moment, idealement, faut faire un script qui recupere un nouveau token, mais pour le moment, sortez les devtool de votre browser favori pour en recuperer un
-* Vu que les coordonnees suivent un format propre a Orange (voir #how), idem, sortez les devtoosl pour recuperer celles qui vous interesse
+* Recuperer les coordonees avec [http://twcc.fr/](http://twcc.fr/)
 * Le script demande curl et jq, les filtres sont ceux de jq, man jq pour plus d'infos
 
 orange.sh xmin xmax ymin ymax [jq filter]
