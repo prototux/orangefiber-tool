@@ -8,14 +8,14 @@ Mon appartement actuel est loin du DSLAM, j'ai du 1mbps, c'est chiant, orange/l'
 Petites remarques sur l'API, dans le desordre, selon ce que je remarque (**NB: ne vous fiez pas a ce que j'ai ecris, c'est purement ce que je devine**):
 
 * A priori si on omet le parametre "where", ca renvoit la liste des villes, avec leur codes INSEE (j'ai pas ete creuser ce que ca renvoit precisement)
-* Ce meme parametre semble contenir **DU PUTAIN DE SQL**, serieusement orange? (j'ai pas test avec sqlmap, mais ca semble mal parti)
+* Ce meme parametre semble contenir du SQL, mais vu que ca semble etre du server ArcGIS, c'est pt'et normal, j'ai pas test avec sqlmap... si c'est vraiment du SQL: wtf orange?
 * L'api semble avoir code de maniere generique
-* * Il y a un parametre pour definir ce qu'on veux en sortie, pratique (a priori, y'a "type_logement", "etat", "operateur", "adresse", "no_dossier", "etape", "sous_etape", "statut_syndic")
+* * Il y a un parametre pour definir ce qu'on veux en sortie, pratique (a priori, y'a "OBJECTID" "type_logement", "etat", "operateur", "adresse", "no_dossier", "etape", "sous_etape", "statut_syndic")
 * * outFields peux aussi contenir "*", ce a quoi il semble cracher tout ce qu'il a de disponible
 * * Il ne semble pas y avoir de limitations sur la taille, visiblement, le truc donne gentilement toute une ville si on lui demande
-* * Il y a des parametres pour definir le format de sortie, et les types d'entree (les esri*), en revanche, definir un format autre que json renvoit un 403
+* * Il y a des parametres pour definir le format de sortie, et les types d'entree (les esri*), en revanche, definir un format autre que json renvoit un 403 -- a priori c'est "json" ou "amf", a tester
 * Etape semble etre equivalent a l'etape de la map (1 = "la fibre est dans votre ville", 2 = "la fibre est dans votre quartier", 3 = "la fibre est pres de votre logement", 4 = "votre logement est eligible")
-* Sous_etape semble toujours etre "A" ou "B", aucune idee de a quoi ca correspond
+* Sous_etape semble toujours etre "A", "B" ou "C", aucune idee de a quoi ca correspond, le sens etre dependant de etape
 * Si etape est a 1, etat va seulement contenir "_", si etape est a 2, 3 ou 4, etat va contenir une string qui donne plus de details
 * Etat semble pouvoir contenir "raccordable" (etape 2), "adressable" (etape 2), "signe" (etape 2,3), "commercialisable" (etape 4), visiblement, les pavillons peuvent seulement etre "adressable", donc je devine que le "adressable" est pour savoir si le batiment (immeuble ou pavillon) est raccordable, et "raccordable" est uniquement pour preciser si les appartements d'un immeuble sont raccordable eux aussi?
 * Type_logement semble contenir soir "pav" soit "imm", logiquement "pavillon" et "immeuble" (ca semble concorder avec les batiments qui se trouvent a ces adresses)
@@ -25,7 +25,11 @@ Petites remarques sur l'API, dans le desordre, selon ce que je remarque (**NB: n
 * En plus de l'adresse, et des infos sur le raccordement, il semble y avoir l'operateur qui fait l'infra, mais aussi un "no_dossier", acucune idee a quoi ca correspond chez orange
 * L'API ne semble pas avoir de problemes a donner qu'une seule adresse si xmax et ymax sont les meme que xmin et ymin, c'est ce que j'utilise pour avoir les donnees sur mon logement seulement
 * Le systeme de coordonees par defaut est le ESRI:102100, mais a priori ArcGIS (le serveur de map qu'Orange utilise) supporte aussi EPSG:3857, aka WGS84, aka google|openstreet maps. c'est celui que j'utilise dans le script (plus d'infos ici: [https://en.wikipedia.org/wiki/Web_Mercator](https://en.wikipedia.org/wiki/Web_Mercator)
-
+* Orange utilise donc ArcGIS de chez ESRI, avec des layers custom, a priori un pour les code INSEE, un "NOM_COM" (nom commune?), et un "no_dossier" (celui qui nous interesse)
+* Pas mal d'infos dans config.json:
+* * Les devs craquent, parfois... "Blablablablabla:<br>-bla bla blabla bla blabla (...) <br>-bla bla blao"
+* * En fait, y'a tout pour parser... j'aurais pu eviter de me faire chier a tout deviner :(
+* * Je vais faire plusieurs fichiers pour decrire ca, ce readme commence a etre trop long...
 
 # Usage
 
