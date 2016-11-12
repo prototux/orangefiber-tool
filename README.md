@@ -23,13 +23,14 @@ Petites remarques sur l'API, dans le desordre, selon ce que je remarque (**NB: n
 * "PS" et "EC" semblent vouloir dire "Pas signe" et "En cours", aucune idee de ce qu'est "BD" (je l'ai rencontre qu'une fois), je devine que c'est un code pour dire que le syndic a refuse de signer?
 * Si le batiment est un pavillon, visiblement, statut_syndic semble etre "PS", logique, vu que y'a pas de syndic.
 * En plus de l'adresse, et des infos sur le raccordement, il semble y avoir l'operateur qui fait l'infra, mais aussi un "no_dossier", acucune idee a quoi ca correspond chez orange
-* Les coordonees geographiques semblent etre dans un format propre a Orange, ce n'est pas des coordonees long/lat usuelles... aucune idee de a quoi ca correspond pour le moment
 * L'API ne semble pas avoir de problemes a donner qu'une seule adresse si xmax et ymax sont les meme que xmin et ymin, c'est ce que j'utilise pour avoir les donnees sur mon logement seulement
+* Le systeme de coordonees par defaut est le ESRI:102100, mais a priori ArcGIS (le serveur de map qu'Orange utilise) supporte aussi EPSG:3857, aka WGS84, aka google|openstreet maps. c'est celui que j'utilise dans le script (plus d'infos ici: [https://en.wikipedia.org/wiki/Web_Mercator](https://en.wikipedia.org/wiki/Web_Mercator)
+
 
 # Usage
 
 * Je previens, le script est vraiment fait a l'arrache, et c'est du reverse engineering de l'API d'Orange (donc ca risque potentiellement de foirer, surtout si Orange apprecie pas ce repo)
-* inSR, outSR et le parametre .spatialReference.wkid de geometry semble etre un id unique pour la request, j'ai pas essaye de le changer pour le moment
+* pm_sr defini la reference spatiale de la map, par defaut c'est ESRI-102100.
 * le script demande un token, j'ai pas mis celui que j'avais dans mes requests parceque j'ai aucune idee de quelles infos ca contient pour le moment, idealement, faut faire un script qui recupere un nouveau token, mais pour le moment, sortez les devtool de votre browser favori pour en recuperer un
 * Vu que les coordonnees suivent un format propre a Orange (voir #how), idem, sortez les devtoosl pour recuperer celles qui vous interesse
 * Le script demande curl et jq, les filtres sont ceux de jq, man jq pour plus d'infos
