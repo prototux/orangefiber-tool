@@ -8,16 +8,15 @@ Selon la doc ArcGIS, les URL de l'API (pour les layers) sont sous la forme http:
 * $folderName = extern
 * $serviceName selon la liste:
 * * optimum_ftth (pour le layer de la couverture FTTH par batiments)
-* * ftth_cache_V3 (pour le layer de la couverture FTTH par zone)
+* * ftth_cache_V3 (pour le layer de la couverture FTTH par ville et par zone)
 * * dsl_cache_V3 (pour le layer des informations sur les communes)
-* * ftth_ponctuels (pour le layer des boutiques Orange et de la couverture par ville)
+* * ftth_ponctuels (pour le layer des boutiques Orange)
 * $layerId = 0 pour le layer des batiments, des villes, des communes, et des zones, 1 pour le layer des boutiques
 
 Soit, avec les URL completes
 
 * Pour la couverture par batiment (celle qui apparait avec le max de zoom, chaque batiment ayant une couleur selon l'etape en cours): `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/optimum_ftth/MapServer/0`
-* Pour la couverture par zone (celle qui apparait avec un peu de zoom, les zones fibrees etant en orange): `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/ftth_cache_V3/MapServer/0`
-* Pour la couverture par ville (celle qui apparait au debut, avec les villes commercialisables): `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/ftth_ponctuels/MapServer/0`
+* Pour la couverture par zone (celle qui apparait au debut avec les villes, et avec un peu de zoom, les zones fibrees etant en orange): `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/ftth_cache_V3/MapServer/0`
 * Pour la liste des communes supportes par Orange: `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/dsl_cache_V3/MapServer/0`
 * Pour la liste des boutiques Orange: `http://couverture-mobile.orange.fr/arcsig/rest/services/extern/ftth_ponctuels/MapServer/1`
 
