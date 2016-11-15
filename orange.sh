@@ -37,4 +37,4 @@ geometry="$1,$2,$3,$4" # xmin,ymin,xmax,ymax
 # Read http://resources.arcgis.com/en/help/rest/apiref/query.html for info on this
 request_url="http://couverture-mobile.orange.fr/arcsig/rest/services/extern/optimum_ftth/MapServer/0/query?"
 request_url+="token=$token&f=json&where=$where&geometry=$geometry&inSR=$spatialref&ourSR=$spatialref&outFields=*"
-echo $(echo $(getJson $request_url) | jq ${5:-.})
+echo $(getJson $request_url) | jq ${5:-.}
