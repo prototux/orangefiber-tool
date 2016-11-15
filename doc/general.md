@@ -52,3 +52,5 @@ le Referer doit etre `http://couverture-mobile.orange.fr/mapV3/fibre/index.html`
 ## Parametres
 Pour ca, faut voir la doc d'ArcGIS, notemment pour [les MapServer](http://resources.arcgis.com/en/help/rest/apiref/mapserver.htm), [les layers](http://resources.arcgis.com/en/help/rest/apiref/layer.html) et [pour query un layer](http://resources.arcgis.com/en/help/rest/apiref/query.html)
 
+## Reference spatiale
+La reference par defaut est ESRI:102100, mais l'API semble accepter EPSG:3857, aka WSG54, aka la reference spatiale de google maps et open street map (anyway, ESRI:102100 semble etre compatible avec EPSG:3857)
