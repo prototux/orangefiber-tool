@@ -16,6 +16,10 @@ Ce layer est le layer (a mon humble avis) le plus interessant, puisqu'il contien
 * adresse: l'adresse postale, avec code postal et ville
 * type_logement: peux contenir `"imm" ou "pav"`, soit "immeuble" et "pavillon"
 * etat: "etat d'avancement fibre", peux contenir `"commercialisable", "signe", "raccordable", "adressable", "_"` (indisponible)
+* * Signe: probablement l'operateur a signe le raccordement
+* * Raccordable: specifique aux immeubles, la fibre est dans l'immeuble, pas encore dans les appartements
+* * Adressable: specifique aux pavillons, la fibre passe a cote + il y a un point de raccordement
+* * Commercialisable: les appartements ou le pavillon est raccorde, les habitants peuvent souscrire a une offre FTTH
 * operateur: l'operateur (je suppose l'operateur qui a pose la fibre)
 * etape: `1,2,3,4`; comme sur la map, respectivement `"fibre dans la ville", "fibre dans le quartier", "pres du logement", "eligible"`, en pratique, ca a l'air de se traduire par "la fibre est posee, pt'et l'armoire de raccordement aussi", "l'armoire est equipee", "l'armoire est active", "on a lance la commercialisation"
 * sous_etape: `A, B ou C`, aucune idee (**HELP NEEDED**)
@@ -23,7 +27,7 @@ Ce layer est le layer (a mon humble avis) le plus interessant, puisqu'il contien
 
 ## Remarques
 
-* Si `type_logement=pav`, etat semble juste contenir "adressable", je devine que la difference entre "adressable" et "raccordable" est que l'un concerne le batiment, l'autre est specifique pour les appartements d'un immeuble
+* Pour la precision entre raccordable/adressable: https://lafibre.info/images/doc/201203_yvelines_fibre_orange_2.png
 * J'ai aucune idee de ce que veux dire "BD" dans statut_syndic, logiquement, ca devrait traduire le fait que le syndic a refuse de signer? (tres rare de rencontrer "BD" sur la map)
 * Aucune idee non plus de ce qu'est sous_etape, mais ce qui est sur, c'est que le sens de A, B et C depend de etape, `etape=1 sous_etape=B` n'aura pas le meme sens que `etape=3 sous_etape=B`. Orange semble degager tout ce qui est `etape=0 et sous_etape=A ou B` (avec le parametre where)
 * "commercialisable" semble etre specifique a l'etape 4, "signe" semble se recontrer a l'etape 2 et 3, "raccordable" et "adressable" semblent se rencontrer qu'a l'etape 2
