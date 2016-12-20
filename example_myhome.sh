@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ORANGE_PATH="./script.sh"
+ORANGE_PATH="./orange.sh"
 HOME_X="your_home_x"
 HOME_Y="your_home_y"
 RAW=$($ORANGE_PATH "$HOME_X" "$HOME_Y" "$HOME_X" "$HOME_Y" '.features|.[0].attributes')
