@@ -29,11 +29,15 @@ fi
 
 echo -n "Accord: "
 if [[ "$statut" == "PS" ]]; then
-	echo "non"
+	echo "pas signé"
 elif [[ "$statut" == "EC" ]]; then
 	echo "negociations en cours"
+elif [[ "$statut" == "DS" ]]; then
+    echo "On ne sait pas ce que $statut veut dire"
+elif [[ "$statut" == "AC" ]]; then
+    echo "On ne sait pas ce que $statut veut dire"
 elif [[ "$statut" == "OK" ]]; then
-	echo "oui"
+	echo "signé"
 else
 	echo "N/A"
 fi
