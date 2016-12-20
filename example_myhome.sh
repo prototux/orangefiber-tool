@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ORANGE_PATH="./script.sh"
+ORANGE_PATH="./orange.sh"
 HOME_X="your_home_x"
 HOME_Y="your_home_y"
 RAW=$($ORANGE_PATH "$HOME_X" "$HOME_Y" "$HOME_X" "$HOME_Y" '.features|.[0].attributes')
@@ -29,11 +29,15 @@ fi
 
 echo -n "Accord: "
 if [[ "$statut" == "PS" ]]; then
-	echo "non"
+	echo "pas signé"
 elif [[ "$statut" == "EC" ]]; then
 	echo "negociations en cours"
+elif [[ "$statut" == "DS" ]]; then
+    echo "On ne sait pas ce que $statut veut dire"
+elif [[ "$statut" == "AC" ]]; then
+    echo "On ne sait pas ce que $statut veut dire"
 elif [[ "$statut" == "OK" ]]; then
-	echo "oui"
+	echo "signé"
 else
 	echo "N/A"
 fi
